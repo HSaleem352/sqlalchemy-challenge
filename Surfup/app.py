@@ -31,11 +31,11 @@ session = Session(engine)
 #################################################
 app = Flask(__name__)
 
-
-
 #################################################
 # Flask Routes
 #################################################
+
+# 1. Home Page
 @app.route("/")
 def welcome():
     return (
@@ -49,6 +49,7 @@ def welcome():
 
     )
 
+# 2. /api/v1.0/precipitation
 @app.route("/api/v1.0/precipitation")
 def precipitation():
     session = Session(engine)
@@ -64,6 +65,7 @@ def precipitation():
     print("Out of Precipitation section.")
     return jsonify(precipitation_dict)
 
+# 3. /api/v1.0/stations
 @app.route("/api/v1.0/stations")
 def stations():
     session = Session(engine)
@@ -83,6 +85,7 @@ def stations():
 
     return jsonify(stations)
 
+# 4. /api/v1.0/tobs
 @app.route("/api/v1.0/tobs")
 def tobs():
     session = Session(engine)
@@ -102,6 +105,7 @@ def tobs():
 
     return jsonify(tob_obs)
 
+# 5.1 /api/v1.0/<start>
 @app.route("/api/v1.0/<start>")
 def get_temps_start(start):
     session = Session(engine)
@@ -119,6 +123,7 @@ def get_temps_start(start):
 
     return jsonify(temperatures)
 
+# 5.2 /api/v1.0/<start>/<end>
 @app.route("/api/v1.0/<start>/<end>")
 def get_temps_start_end(start, end):
     session = Session(engine)
@@ -137,6 +142,6 @@ def get_temps_start_end(start, end):
     return jsonify(temperatures2)
 
 
-
+# Shows the debug tool to open and run the web app
 if __name__ == "__main__":
     app.run(debug=True)
